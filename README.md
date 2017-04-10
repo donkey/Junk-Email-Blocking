@@ -31,7 +31,7 @@ Build the Postfix hash database
 
 The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the SMTP error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
 
-Build Postfix hash _junkbl_access.db_ and update them on the Linux console of the Postfix host.<br>
+Build Postfix hash _junkbl_access.db_ and update them on the Linux console on the Postfix host.<br>
 `postmap /etc/postfix/junkbl_access`
 
 Add the junkbl to the Postfix main configuration `/etc/postfix/main.cf`<br>
