@@ -1,5 +1,5 @@
 <#
-  JunkEmails.ps1 extract junk email addresses from mailboxes do write to out-file and copy to smarthost
+  JunkEmails.ps1 extract junk email addresses from mailboxes and write to file being distribute to smarthost
   Version 1.0.1 (07.04.2017) by DonMatteo
   Mail: think@unblog.ch
   Blog: think.unblog.ch
