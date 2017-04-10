@@ -22,13 +22,20 @@ On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) f
 
 The stream-editor - sed converts the line breaks, removes empty characters and inserts the error code 550 at the end of each line, so that the unsuccessful e-mails of the blocked senders list are rejected during the attempt to deliver.
 
-To create Postfix DB _junkbl_access.db_ and update them on the Linux console of the Postfix MTA.
+To create Postfix DB _junkbl_access.db_ and update them on the Linux console of the Postfix MTA.<br>
 `postmap /etc/postfix/junkbl_access`
 
-Add the junkbl to the Postfix main configuration.
+Add junkbl to the Postfix main configuration.
 
-...vi /etc/postfix/main.cf
- 
+`vi /etc/postfix/main.cf
 smtpd_sender_restrictions =
-        check_sender_access hash:/etc/postfix/junkbl_access,
-...
+   check_sender_access hash:/etc/postfix/junkbl_access,
+`
+
+After a `postfix reload` the Outlook Blocklist are applied.
+
+A cronjob will update the junk-email blacklist continuously.
+`5 * * * * /usr/bin/junkbl.sh >/dev/null 2>&1`
+
+### Note
+How to run Exchange Management Shell scripts are out from task scheduler, you can consulate [Exchange MailboxStatistics Mail Report](http://think.unblog.ch/exchange-mailboxstatistics-mail-report/).
