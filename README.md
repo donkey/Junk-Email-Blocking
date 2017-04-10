@@ -22,7 +22,7 @@ PuTTY is required on the exchange server, after the installation of PuTTY 64bit 
 
 On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe to the _junkbl_access_ file. Save the `code` to a scrip file like _junkbl.sh_ and make it executable with _chmod +x junkbl.sh_.
 
-`cat /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/^[ \t]*//;/^\s*$/d;s/\r$//g;s/$/\t 550/' | tail -n+3 > /etc/postfix/junkbl_access`
+`cat /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/^[ \t]*//;/^\s*$/d;s/\r$//g;s/$/\t 550/' | tail -n+3 > /etc/postfix/junkbl_access`<br>
 Build the Postfix hash database.
 `postmap /etc/postfix/junkbl_access`
 
