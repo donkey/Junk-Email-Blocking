@@ -28,7 +28,7 @@ The stream-editor - sed converts the line breaks, removes empty characters and i
 To create Postfix DB _junkbl_access.db_ and update them on the Linux console of the Postfix MTA.<br>
 `postmap /etc/postfix/junkbl_access`
 
-Add junkbl to the Postfix main configuration `/etc/postfix/main.cf`
+Add junkbl to the Postfix main configuration `/etc/postfix/main.cf`<br>
 `smtpd_sender_restrictions =
    check_sender_access hash:/etc/postfix/junkbl_access,
 `
