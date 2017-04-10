@@ -14,7 +14,7 @@ As an e-mail client software often using in companies is MS Outlook they are wid
 There is a possibility to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers that work with the Postfix MTA.
 
 ### Installation
-The PowerShell script _JunkEmails.ps1_ retrieves the junk e-mail entries from the Outlook junk e-mail list of blocked senders, and extracts formatted output as Windows ANSI text and into an ACSII text file.
+The PowerShell script _JunkEmails.ps1_ retrieves the junk e-mail entries from the Outlook junk e-mail list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file.
 
 The script is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a job in task scheduling, e.g. at any hour.
 
