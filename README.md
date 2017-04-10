@@ -7,7 +7,7 @@ _Extract Outlook junk email addresses from mailboxes write to file being distrib
 ### Preface
 No one likes spam emails, to curb the flood of unsolicited emails, incoming emails have to go through several filters and so-called Milters. An efficient filter solution is provided by Postfix's Mail Transfer Agent, the Open Source program was developed by Wietse Zweitze Venema in 1998. Postfix is a powerful mail transfer agent - MTA for Unix and Unix derivatives. The software should be a compatible alternative to Sendmail at the time of development. During programming, special attention was paid to safety aspects. The source code of Postfix is available under the IBM Public License and is thus free software. Postfix MTA's are increasingly used by many internet providers and large companies.
 
-The Software architecture of Postfix allows to implement a variety of filters, such as SpamAssassin this under the Apache license, to filter out and block unwanted emails, or to check the behavior of a sender with greylisting routines. Protection against viruses and malicious code provides Clam AntiVirus - ClamAV is under the GNU General Public License.
+The software architecture of Postfix allows to implement a variety of filters, such as SpamAssassin this under the Apache license, to filter out and block unwanted emails, or to check the behavior of a sender with greylisting routines. Protection against viruses and malicious code provides Clam AntiVirus - ClamAV is under the GNU General Public License.
 
 As an e-mail client software often using in companies is MS Outlook they are widely used in conjuction with MS Exchange. Outlook offers the possibility to block unwanted sender, the name is not exactly correct, the so-called junk e-mails are not blocked on the server, but are moved into the Outlook folder Junk E-Mail. It would be better if the alleged sender is not able to deliver it, so it will rejected, the sending server (MTA) is now to see what he should doing with.
 
@@ -23,6 +23,7 @@ PuTTY is required on the exchange server, after the installation of PuTTY 64bit 
 On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe to the _junkbl_access_ file. Save the `code` to a scrip file like _junkbl.sh_ and make it executable with _chmod +x junkbl.sh_.
 
 `cat /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/^[ \t]*//;/^\s*$/d;s/\r$//g;s/$/\t 550/' | tail -n+3 > /etc/postfix/junkbl_access`
+Build the Postfix hash database.
 `postmap /etc/postfix/junkbl_access`
 
 The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
