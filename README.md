@@ -2,7 +2,7 @@
 
 ![Junk Email Blocking](https://github.com/donkey/Junk-Email-Blocking/blob/master/junkemails.png)
 
-_Extract Outlook junk email addresses from mailboxes do write to file and distribute them to Postfix Smarthost_
+_Extract Outlook junk email addresses from mailboxes write to file being distribute them to Postfix Smarthost_
 
 ### Preface
 No one likes spam emails, to curb the flood of unsolicited emails, incoming emails have to go through several filters and so-called Milters. An efficient filter solution is provided by Postfix's Mail Transfer Agent, the Open Source program was developed by Wietse Zweitze Venema in 1998. Postfix is a powerful mail transfer agent - MTA for Unix and Unix derivatives. The software should be a compatible alternative to Sendmail at the time of development. During programming, special attention was paid to safety aspects. The source code of Postfix is available under the IBM Public License and is thus free software. Postfix MTA's are increasingly used by many internet providers and large companies.
