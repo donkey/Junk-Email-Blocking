@@ -1,6 +1,6 @@
 ## Junk-Email-Blocking
 Extract Outlook junk email addresses from mailboxes do write to file and distribute them to Postfix Smarthost
-[Junk Email Blocking](https://github.com/donkey/Junk-Email-Blocking/junkemails.png)
+[Junk Email Blocking](https://github.com/donkey/Junk-Email-Blocking/blob/master/junkemails.png)
 
 ### Preface
 No one likes spam emails, to curb the flood of unsolicited emails, incoming emails have to go through several filters and so-called Milters. An efficient filter solution is provided by Postfix's Mail Transfer Agent, the Open Source program was developed by Wietse Zweitze Venema in 1998. Postfix is a powerful mail transfer agent - MTA for Unix and Unix derivatives. The software should be a compatible alternative to Sendmail at the time of development. During programming, special attention was paid to safety aspects. The source code of Postfix is available under the IBM Public License and is thus free software. Postfix MTA's are increasingly used by many internet providers and large companies.
@@ -11,6 +11,7 @@ As an e-mail client software often using in companies is MS Outlook they are wid
 
 There is a possibility to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers that work with the Postfix MTA.
 
+### Installation
 The PowerShell script _JunkEmails.ps1_ retrieves the junk e-mail entries from the Outlook junk e-mail list of blocked senders, and extracts formatted output as Windows ANSI text and into an ACSII text file.
 
 The script is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a job in task scheduling, e.g. at any hour.
