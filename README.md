@@ -29,7 +29,7 @@ Save the `code` to a scrip file like _junkbl.sh_ to _/usr/bin/_ and make it exec
 Build the Postfix hash database
 `postmap /etc/postfix/junkbl_access`
 
-The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
+The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the SMTP error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
 
 Build Postfix hash _junkbl_access.db_ and update them on the Linux console of the Postfix host.<br>
 `postmap /etc/postfix/junkbl_access`
