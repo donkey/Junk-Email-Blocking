@@ -13,35 +13,36 @@ As an e-mail client software often using in companies is MS Outlook they are wid
 
 There is a possibility to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers that work with the Postfix MTA.
 
-### Installation
+### Workaround
 The PowerShell script _JunkEmails.ps1_ retrieves the junk e-mail entries from the Outlook junk e-mail list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file.
 
 The script is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a job in task scheduling, e.g. at any hour.
 
 PuTTY is required on the exchange server, after the installation of PuTTY 64bit done, _pscp.exe_ (PuTTY Secure Copy) is used to transfer the block list blocked senders to the Smarthost. In order to avoid a password prompt, a keyparent must be created with PuTTY Key Generator (_puttygen.exe_). The generated public key is copied into the file _authorized_keys_ under the home directory of the user in the directory .ssh. So the script with _pscp_ is able to authenticate at the Smarthost.
 
+### Installation
 On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe to the _junkbl_access_ file.
 
 `cat /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/^[ \t]*//;/^\s*$/d;s/\r$//g;s/$/\t 550/' | tail -n+3 > /etc/postfix/junkbl_access`<br>
 
-Save the `code` to a scrip file like _junkbl.sh_ to _/usr/bin/_ and make it executable use _chmod +x junkbl.sh_.<br>
+##### Save the `code` to a scrip file like _junkbl.sh_ to _/usr/bin/_ and make it executable use _chmod +x junkbl.sh_.<br>
 
-Build the Postfix hash database
+##### Build the Postfix hash database
 `postmap /etc/postfix/junkbl_access`
 
 The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the SMTP error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
 
-Build Postfix hash _junkbl_access.db_ and update them on the Linux console on the Postfix host.<br>
+##### Build Postfix hash _junkbl_access.db_ and update them on the Linux console on the Postfix host.
 `postmap /etc/postfix/junkbl_access`
 
-Add the junkbl to the Postfix main configuration `/etc/postfix/main.cf`<br>
+##### Add the junkbl to the Postfix main configuration `/etc/postfix/main.cf`
 `smtpd_sender_restrictions =
    check_sender_access hash:/etc/postfix/junkbl_access,
 `
 
-After the command `postfix reload` the Outlook Blocklist are applied by Postfix.
+##### After the command `postfix reload` the Outlook Blocklist are applied by Postfix.
 
-A cronjob will update the junk-email blacklist continuously.
+##### A cronjob will update the junk-email blacklist continuously.
 `5 * * * * root /usr/bin/junkbl.sh >/dev/null 2>&1`
 
 ### Note
