@@ -20,10 +20,13 @@ The script is run as an administrator on the Exchange Server in the Exchange Man
 
 PuTTY is required on the exchange server, after the installation of PuTTY 64bit done, _pscp.exe_ (PuTTY Secure Copy) is used to transfer the block list blocked senders to the Smarthost. In order to avoid a password prompt, a keyparent must be created with PuTTY Key Generator (_puttygen.exe_). The generated public key is copied into the file _authorized_keys_ under the home directory of the user in the directory .ssh. So the script with _pscp_ is able to authenticate at the Smarthost.
 
-On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe to the _junkbl_access_ file. Save the `code` to a scrip file like _junkbl.sh_ and make it executable with _chmod +x junkbl.sh_.
+On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe to the _junkbl_access_ file.
 
 `cat /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/^[ \t]*//;/^\s*$/d;s/\r$//g;s/$/\t 550/' | tail -n+3 > /etc/postfix/junkbl_access`<br>
-Build the Postfix hash database.
+
+Save the `code` to a scrip file like _junkbl.sh_ and make it executable with _chmod +x junkbl.sh_.<br>
+
+Build the Postfix hash databas.
 `postmap /etc/postfix/junkbl_access`
 
 The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
