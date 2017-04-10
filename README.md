@@ -26,7 +26,7 @@ On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) f
 
 Save the `code` to a scrip file like _junkbl.sh_ and make it executable with _chmod +x junkbl.sh_.<br>
 
-Build the Postfix hash databas
+Build the Postfix hash database
 `postmap /etc/postfix/junkbl_access`
 
 The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
