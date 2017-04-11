@@ -23,7 +23,7 @@ PuTTY is required on the exchange server, after the installation of PuTTY 64bit 
 ### Installation
 On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe to the _junkbl_access_ file.
 
-`cat -v /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/^[ \t]*//;/^\s*$/d;s/\^M//g' | grep . | grep -v BlockedSendersAndDomains | sed 's/$/\t 550/'  > /etc/postfix/junkbl_access`
+`cat -v /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/^[ \t]*//;/^\s*$/d;s/\^M//g' | grep . | grep -v BlockedSendersAndDomains | sed 's/$/\t 550/' > /etc/postfix/junkbl_access`
 
 `postmap /etc/postfix/junkbl_access`
 
@@ -39,7 +39,7 @@ The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in p
 
 ##### Add the junkbl to the Postfix main configuration `/etc/postfix/main.cf`
 `smtpd_sender_restrictions =`<br>
-`&nbsp;&nbsp;&nbsp;&nbsp; check_sender_access hash:/etc/postfix/junkbl_access,`
+`> check_sender_access hash:/etc/postfix/junkbl_access,`
 
 ##### After the command `postfix reload` the Outlook Blocklist are applied by Postfix.
 
