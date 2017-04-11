@@ -15,7 +15,7 @@ $input_file = "$Junk_Path\JunkEmails.txt"
 $output_asc = "$Junk_Path\extracted-JunkEmails.asc"
 $output_txt = "$Junk_Path\extracted-JunkEmails.txt"
  
-$junkemails = (Get-MailboxJunkEmailConfiguration -Identity * | Select BlockedSendersAndDomains)
+$junkemails = (Get-MailboxJunkEmailConfiguration -Identity * | fl BlockedSendersAndDomains)
 $junkemails | Out-File -FilePath $output_asc -Encoding ASCII
 $junkemails | Out-File -FilePath $input_file
  
