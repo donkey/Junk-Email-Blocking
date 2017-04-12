@@ -57,7 +57,7 @@ The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in p
 
 ##### After the command `postfix reload` the Outlook Blocklist are applied by Postfix.
 
-##### A cronjob will update the junk-email blacklist continuously.
+##### A cronjob will update the junk-email blacklist, here 5 minutes after every hour continuously.
 `5 * * * * root /usr/bin/junkbl.sh >/dev/null 2>&1`
 
 ### Note
