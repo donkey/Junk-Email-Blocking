@@ -61,4 +61,5 @@ The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in p
 `5 * * * * root /usr/bin/junkbl.sh >/dev/null 2>&1`
 
 ### Note
+On CentOS 7 SSHD needs `ForceCommand internal-sftp` in the `sshd_config` to exec sftp commands, or use the option -scp.
 How to run Exchange Management Shell scripts are out from task scheduler, you can consulate [Exchange MailboxStatistics Mail Report](http://think.unblog.ch/exchange-mailboxstatistics-mail-report/).
