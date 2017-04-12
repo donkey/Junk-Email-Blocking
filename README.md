@@ -21,10 +21,15 @@ The script is run as an administrator on the Exchange Server in the Exchange Man
 
 #### Run task scheduler to add new scheduled job
 For Program/script enter:
+
 `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`
+
 Under Add Arguments enter for Exchange 2010:
+
 `-version 2.0 -NonInteractive -WindowStyle Hidden -command ". 'C:\Program Files\Microsoft\Exchange Server\V14\bin\RemoteExchange.ps1'; Connect-ExchangeServer -auto; C:\Windows\System32\JunkEmails.ps1"`
+
 Or, for Exchange 2013:
+
 `-NonInteractive -WindowStyle Hidden -command ". 'C:\Program Files\Microsoft\Exchange Server\V15\bin\RemoteExchange.ps1'; Connect-ExchangeServer -auto; C:\Windows\System32\JunkEmails.ps1"`
 
 In the subsequent Properties dialog box that opens for the new task, ensure enter Security Options you change the radio option to "Run whether the user is logged on or not" and if you need to, change the user account that the task runs as.
