@@ -45,7 +45,7 @@ On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) f
 
 > `cat -v /tmp/extracted-TrustedEmails.asc | tr , '\n' | sed 's/[{}]//g;s/[\t ]//g;/^$/d;s/\^M$//g;s/TrustedSendersAndDomains://g' | grep . | sort | uniq -u | sed 's/$/\t ok/' > /etc/postfix/trusted_access`
 
-> `postmap /etc/postfix/junkbl_access`
+> `postmap /etc/postfix/trusted_access`
 
 ##### Make the script executable
 `chmod +x junkbl.sh`
