@@ -14,7 +14,7 @@ As an e-mail client software often using in companies is MS Outlook they are wid
 ### Workaround
 There is a possibility to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers that work with the Postfix MTA.
 
-The PowerShell script _JunkEmails.ps1_ retrieves the junk e-mail entries from the Outlook junk e-mail list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file.
+The PowerShell script _JunkEmails.ps1_ retrieves the junk e-mail entries from the Outlook junk e-mail list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file _extracted-JunkEmails.asc_. The Whitelist is created in to _extracted-TrustedEmails.asc_.
 
 ### Installation
 The script is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a new job in task scheduling, e.g. at any hour.
@@ -39,7 +39,12 @@ PuTTY is required on the exchange server, after the installation of PuTTY 64bit 
 On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe to the _junkbl_access_ file.
 
 ##### Save the `code` to a scrip file like _junkbl.sh_ to _/usr/bin/_
-> `cat -v /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/[\t ]//g;/^$/d;s/\^M$//g;s/BlockedSendersAndDomains://g' | grep . | sort | uniq -u | sed 's/$/\t 550 message was classified as spam/'  > /etc/postfix/junkbl_access`
+> `# build postfix junk emails
+cat -v /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/[\t ]//g;/^$/d;s/\^M$//g;s/BlockedSendersAndDomains://g' | grep . | sort | uniq -u | sed 's/$/\t 550 message was classified as spam/'  > /etc/postfix/junkbl_access
+postmap /etc/postfix/junkbl_access
+# build postfix trusted emails
+cat -v /tmp/extracted-TrustedEmails.asc | tr , '\n' | sed 's/[{}]//g;s/[\t ]//g;/^$/d;s/\^M$//g;s/TrustedSendersAndDomains://g' | grep . | sort | uniq -u | sed 's/$/\t ok/' > /etc/postfix/trusted_access
+postmap /etc/postfix/trusted_access`
 
 > `postmap /etc/postfix/junkbl_access`
 
