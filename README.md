@@ -56,8 +56,11 @@ The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in p
 `postmap /etc/postfix/junkbl_access`
 
 ##### Add the junkbl to the Postfix main configuration `/etc/postfix/main.cf`
-`smtpd_sender_restrictions =`<br>
+`smtpd_recipient_restrictions =`<br>
+> `permit_mynetworks,`
 > `check_sender_access hash:/etc/postfix/junkbl_access,`
+> `check_sender_access hash:/etc/postfix/trusted_access,`
+
 
 ##### After the command `postfix reload` the Outlook Blocklist are applied by Postfix.
 
