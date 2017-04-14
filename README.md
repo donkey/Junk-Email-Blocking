@@ -52,8 +52,10 @@ On the Linux Smarthost a shell script performs to convert the content to the Uni
 
 The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the SMTP error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
 
-##### Build Postfix lookup tables _junkbl_access.db_ at the Linux console of smarthost.
+##### Build Postfix lookup tables at the Smarthost Linux console.
 `postmap /etc/postfix/junkbl_access`
+
+`postmap /etc/postfix/trusted_access`
 
 ##### Add the junk access and trusted access to the Postfix main configuration `/etc/postfix/main.cf`
 `smtpd_recipient_restrictions =`
