@@ -52,10 +52,10 @@ On the Linux Smarthost a shell script performs to convert the content to the Uni
 
 The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in place of comma, removes whitespace characters and append the SMTP error code 550 at the end of each line, so that the unsolicited e-mails of the blocked senders list are rejected during the attempt to deliver.
 
-##### Build hash _junkbl_access.db_ on the Linux console of the Postfix smarthost.
+##### Build Postfix lookup tables _junkbl_access.db_ at the Linux console of smarthost.
 `postmap /etc/postfix/junkbl_access`
 
-##### Add the junkbl to the Postfix main configuration `/etc/postfix/main.cf`
+##### Add the junk access and trusted access to the Postfix main configuration `/etc/postfix/main.cf`
 `smtpd_recipient_restrictions =`
 
 > `permit_mynetworks,`
@@ -67,10 +67,10 @@ The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in p
 
 ##### After the command `postfix reload` the Outlook Blocklist are applied by Postfix.
 
-##### A cronjob will update the junk-email blacklist, here 5 minutes after every hour continuously.
+##### A cronjob will update the junk email blacklist continuously, here 5 minutes after every hour.
 `5 * * * * root /usr/bin/junkbl.sh >/dev/null 2>&1`
 
 ### Note
-On CentOS 7 the SSH daemon configuration needs `ForceCommand internal-sftp` in the `sshd_config` to accept sftp commands. Add the appropriate user to the group `sftp_users` by using `usermod -G sftp_users {username}` this are listed in `sshd_config` to the directive `Match Group sftp_users`. Note. the user are use for sftp is not able to connect interactive ssh terminal, in this case you need another user this may not belong to the group sftp_users.
+CentOS 7 SSH daemon configuration require the statement `ForceCommand internal-sftp` in the `sshd_config` to accept sftp commands. Add the appropriate user to the group `sftp_users` by using `usermod -G sftp_users {username}` this are listed in `sshd_config` to the directive `Match Group sftp_users`. Note. the user are use for sftp is not able to connect interactive ssh terminal, in this case you need another user this may not belong to the group sftp_users.
 
 How to run Exchange Management Shell scripts are out from task scheduler, you can consulate [Exchange MailboxStatistics Mail Report](http://think.unblog.ch/exchange-mailboxstatistics-mail-report/).
