@@ -12,9 +12,9 @@ The software architecture of Postfix allows to implement a variety of filters, s
 As an e-mail client software often using in companies is MS Outlook they are widely used in conjuction with MS Exchange. Outlook offers the possibility to block junk e-mails, but the name is not exactly correct, the so-called junk e-mails are not blocked on the server, but are moved into the Outlook folder **Junk E-Mail**. It would be better if the alleged sender is not able to deliver it, so it will rejected, the sending server (MTA) is now to see what he should doing with.
 
 ### Workaround
-There is a possibility to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers they are running the Postfix MTA.
+There is a way to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers they are running the Postfix MTA.
 
-The PowerShell script _JunkEmails.ps1_ retrieves the junk e-mail entries from the Outlook junk e-mail list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file _extracted-JunkEmails.asc_. The Whitelist is created in to _extracted-TrustedEmails.asc_.
+The purpose of the PowerShell script _JunkEmails.ps1_ are retrieves the junk e-mail entries from the Outlook **Junk E-Mail** list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file _extracted-JunkEmails.asc_. The Whitelist is created in to _extracted-TrustedEmails.asc_.
 
 ### Installation
 The script is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a new job in task scheduling, e.g. at any hour.
