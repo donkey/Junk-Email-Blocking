@@ -12,7 +12,7 @@ The software architecture of Postfix allows to implement a variety of filters, s
 As an e-mail client software often using in companies is MS Outlook they are widely used in conjuction with MS Exchange. Outlook offers the possibility to block unwanted sender, the name is not exactly correct, the so-called junk e-mails are not blocked on the server, but are moved into the Outlook folder Junk E-Mail. It would be better if the alleged sender is not able to deliver it, so it will rejected, the sending server (MTA) is now to see what he should doing with.
 
 ### Workaround
-There is a possibility to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers that work with the Postfix MTA.
+There is a possibility to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers they are running the Postfix MTA.
 
 The PowerShell script _JunkEmails.ps1_ retrieves the junk e-mail entries from the Outlook junk e-mail list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file _extracted-JunkEmails.asc_. The Whitelist is created in to _extracted-TrustedEmails.asc_.
 
@@ -34,9 +34,9 @@ Or, for Exchange 2013:
 
 In the subsequent Properties dialog box that opens for the new task, ensure enter Security Options you change the radio option to "Run whether the user is logged on or not" and if you need to, change the user account that the task runs as.
 
-PuTTY is required on the exchange server, after the installation of PuTTY 64bit done, _pscp.exe_ (PuTTY Secure Copy) is used to transfer the block list blocked senders to the Smarthost. In order to avoid a password prompt, a keyparent must be created with PuTTY Key Generator (_puttygen.exe_). The generated public key is copied into the file _authorized_keys_ under the home directory of the user in the directory .ssh. So the script with _pscp_ is able to authenticate at the Smarthost.
+PuTTY is required on the exchange server, after the installation of PuTTY 64bit done, _pscp.exe_ (PuTTY Secure Copy) it perform transfer the list blocked senders to the Smarthost. In order to avoid a password prompt, a key pair will be create using by PuTTY Key Generator (_puttygen.exe_). The generated public key are copied into the file _authorized_keys_ under the users home directory into directory .ssh. Now the script use _pscp_ is able to authenticate against the Smarthost.
 
-On the Linux Smarthost is a shell script to convert the lines to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe to the _junkbl_access_ file.
+On the Linux Smarthost a shell script performs to convert the content to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe into the _junkbl_access_ file.
 
 ##### Save the `code` to a scrip file like _junkbl.sh_ to _/usr/bin/_
 > `cat -v /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/[\t ]//g;/^$/d;s/\^M$//g;s/BlockedSendersAndDomains://g' | grep . | sort | uniq -u | sed 's/$/\t 550 message was classified as spam/'  > /etc/postfix/junkbl_access`
