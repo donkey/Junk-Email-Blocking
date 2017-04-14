@@ -9,7 +9,7 @@ No one likes spam emails, to curb the flood of unsolicited emails, incoming emai
 
 The software architecture of Postfix allows to implement a variety of filters, such as SpamAssassin this under the Apache license, to filter out and tagging unwanted emails, or to check the behavior of a sender with greylisting routines. Protection against viruses and malicious code provides Clam AntiVirus - ClamAV is under the GNU General Public License.
 
-As an e-mail client software often using in companies is MS Outlook they are widely used in conjuction with MS Exchange. Outlook offers the possibility to block unwanted sender, the name is not exactly correct, the so-called junk e-mails are not blocked on the server, but are moved into the Outlook folder Junk E-Mail. It would be better if the alleged sender is not able to deliver it, so it will rejected, the sending server (MTA) is now to see what he should doing with.
+As an e-mail client software often using in companies is MS Outlook they are widely used in conjuction with MS Exchange. Outlook offers the possibility to block junk e-mails, but the name is not exactly correct, the so-called junk e-mails are not blocked on the server, but are moved into the Outlook folder **Junk E-Mail**. It would be better if the alleged sender is not able to deliver it, so it will rejected, the sending server (MTA) is now to see what he should doing with.
 
 ### Workaround
 There is a possibility to intervene when the Exchange Server does not receive e-mails directly from the Internet, but rather oprate via a Smarthost. Smarthosts are mostly Linux-based servers they are running the Postfix MTA.
