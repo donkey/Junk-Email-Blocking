@@ -77,5 +77,4 @@ CentOS 7 SSH daemon configuration require the statement `ForceCommand internal-s
 
 How to use [The PuTTY Key Generator](http://think.unblog.ch/putty-key-generator/)
 
-### Note. 
 The policy with this approach for the acceptance or rejection of e-mail sender impact the whole organistaion. It is therefore important that the users aware of their actions and know the impact with his consequences.
