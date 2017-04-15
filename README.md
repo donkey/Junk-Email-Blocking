@@ -17,7 +17,7 @@ There is a way to intervene when the Exchange Server does not receive e-mails di
 The purpose of the PowerShell script _JunkEmails.ps1_ are retrieves the junk e-mail entries from the Outlook **Junk E-Mail** list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file _extracted-JunkEmails.asc_. The Whitelist is created in to _extracted-TrustedEmails.asc_.
 
 ### Installation
-The script _junkbl.sh_ is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a new task scheduled job, e.g. at any hour.
+The script `JunkEmails.ps1` is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a new task scheduled job, e.g. at any hour.
 
 #### Run task scheduler to add new scheduled job
 For Program/script enter:
@@ -36,7 +36,7 @@ In the subsequent Properties dialog box that opens for the new task, ensure ente
 
 PuTTY is required on the exchange server, after the installation of PuTTY 64bit done, `pscp.exe` (PuTTY Secure Copy) performs the transfer of the list blocked senders `extracted-JunkEmails.asc` to the Smarthost. In order to avoid a password prompt, a key pair will be create using by PuTTY Key Generator (_puttygen.exe_). The generated public key are copied into the file _authorized_keys_ under the users home directory into directory .ssh. Now the script using `pscp` are able to authenticate against the Smarthost.
 
-On the Linux Smarthost a shell script convert the content to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe into the file `junkbl_access`.
+On the Linux Smarthost the shell script `junkbl.sh` convert the content to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe into the file `junkbl_access`.
 
 ##### Save the `code` to a scrip file like _junkbl.sh_ to _/usr/bin/_
 > `cat -v /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/[\t ]//g;/^$/d;s/\^M$//g;s/BlockedSendersAndDomains://g' | grep . | sort | uniq -u | sed 's/$/\t 550 message was classified as spam/'  > /etc/postfix/junkbl_access`
