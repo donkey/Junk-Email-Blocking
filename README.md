@@ -34,7 +34,7 @@ Or, for Exchange 2013:
 
 In the subsequent Properties dialog box that opens for the new task, ensure enter Security Options you change the radio option to "Run whether the user is logged on or not" and if you need to, change the user account that the task runs as.
 
-PuTTY is required on the exchange server, after the installation of PuTTY 64bit done, _pscp.exe_ (PuTTY Secure Copy) performs transfer the list blocked senders to the Smarthost. In order to avoid a password prompt, a key pair will be create using by PuTTY Key Generator (_puttygen.exe_). The generated public key are copied into the file _authorized_keys_ under the users home directory into directory .ssh. Now the script using _pscp_ are able to authenticate against the Smarthost.
+PuTTY is required on the exchange server, after the installation of PuTTY 64bit done, `pscp.exe` (PuTTY Secure Copy) performs the transfer of the list blocked senders `extracted-JunkEmails.asc` to the Smarthost. In order to avoid a password prompt, a key pair will be create using by PuTTY Key Generator (_puttygen.exe_). The generated public key are copied into the file _authorized_keys_ under the users home directory into directory .ssh. Now the script using `pscp` are able to authenticate against the Smarthost.
 
 On the Linux Smarthost a shell script convert the content to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe into the file _junkbl_access_.
 
