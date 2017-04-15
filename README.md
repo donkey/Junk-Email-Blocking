@@ -36,7 +36,7 @@ In the subsequent Properties dialog box that opens for the new task, ensure ente
 
 PuTTY is required on the exchange server, after the installation of PuTTY 64bit done, `pscp.exe` (PuTTY Secure Copy) performs the transfer of the list blocked senders `extracted-JunkEmails.asc` to the Smarthost. In order to avoid a password prompt, a key pair will be create using by PuTTY Key Generator (_puttygen.exe_). The generated public key are copied into the file _authorized_keys_ under the users home directory into directory .ssh. Now the script using `pscp` are able to authenticate against the Smarthost.
 
-On the Linux Smarthost a shell script convert the content to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe into the file _junkbl_access_.
+On the Linux Smarthost a shell script convert the content to the Unix (LF) format. This one-line creates the appropriate output to the postfix directory via pipe into the file `junkbl_access`.
 
 ##### Save the `code` to a scrip file like _junkbl.sh_ to _/usr/bin/_
 > `cat -v /tmp/extracted-JunkEmails.asc | tr , '\n' | sed 's/[{}]//g;s/[\t ]//g;/^$/d;s/\^M$//g;s/BlockedSendersAndDomains://g' | grep . | sort | uniq -u | sed 's/$/\t 550 message was classified as spam/'  > /etc/postfix/junkbl_access`
@@ -75,4 +75,7 @@ The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in p
 ### Note
 CentOS 7 SSH daemon configuration require the statement `ForceCommand internal-sftp` in the `sshd_config` to accept sftp commands. Add the appropriate user to the group `sftp_users` by using `usermod -G sftp_users {username}` this are listed in `sshd_config` to the directive `Match Group sftp_users`. Note. the user are use for sftp is not able to connect interactive ssh terminal, in this case you need another user this may not belong to the group sftp_users.
 
-How to run Exchange Management Shell scripts are out from task scheduler, you can consulate [Exchange MailboxStatistics Mail Report](http://think.unblog.ch/exchange-mailboxstatistics-mail-report/).
+How to use [The PuTTY Key Generator](http://think.unblog.ch/putty-key-generator/)
+
+### Note. 
+The policy with this approach for the acceptance or rejection of e-mail sender impact the whole organistaion. It is therefore important that the users aware of their actions and know the impact with his consequences.
