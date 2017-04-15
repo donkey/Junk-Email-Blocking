@@ -17,7 +17,7 @@ There is a way to intervene when the Exchange Server does not receive e-mails di
 The purpose of the PowerShell script _JunkEmails.ps1_ are retrieves the junk e-mail entries from the Outlook **Junk E-Mail** list of blocked senders of any users mailbox, and extracts formatted output as Windows ANSI text and into an ACSII text file _extracted-JunkEmails.asc_. The Whitelist is created in to _extracted-TrustedEmails.asc_.
 
 ### Installation
-The script _junkbl.sh_ is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a new job in task scheduling, e.g. at any hour.
+The script _junkbl.sh_ is run as an administrator on the Exchange Server in the Exchange Management Shell, suitably as a new task scheduled job, e.g. at any hour.
 
 #### Run task scheduler to add new scheduled job
 For Program/script enter:
