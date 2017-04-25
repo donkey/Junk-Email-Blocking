@@ -77,4 +77,8 @@ CentOS 7 SSH daemon configuration require the statement `ForceCommand internal-s
 
 How to use [The PuTTY Key Generator](http://think.unblog.ch/putty-key-generator/)
 
+When working in the Exchange Management Shell you may encounter some query output that gets truncated with ellipsis or cut off followed by three points. For example: The reason this happens is that the default Powershell environment for Exchange has an enumeration limit. This is controlled by the $FormatEnumerationLimit variable in the bin/Exchange.ps1 file. This variable has a default value of 16. You can modify the variable to a larger value, or set it to -1 for “unlimited”.
+
+`[PS] C:>$FormatEnumerationLimit =-1`
+
 The policy with this approach for the acceptance or rejection of e-mail sender impact the whole organistaion. It is therefore important that the users aware of their actions and know the impact with his consequences.
