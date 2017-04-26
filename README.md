@@ -60,17 +60,11 @@ The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in p
 ##### Add the junk access and trusted access to the Postfix main configuration `/etc/postfix/main.cf`
 
 ```
- here is it
-   and here
+smtpd_recipient_restrictions =
+            permit_mynetworks,
+            check_sender_access hash:/etc/postfix/junkbl_access,
+            check_sender_access hash:/etc/postfix/trusted_access,
 ```
-
-`smtpd_recipient_restrictions =`
-
-> `permit_mynetworks,`
-
-> `check_sender_access hash:/etc/postfix/junkbl_access,`
-
-> `check_sender_access hash:/etc/postfix/trusted_access,`
 
 ##### After the command `postfix reload` the Outlook Blocklist are applied by Postfix.
 
