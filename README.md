@@ -59,9 +59,10 @@ The stream-editor - sed converts the (CR/LF) line breaks to (LF), insert LF in p
 
 ##### Add the junk access and trusted access to the Postfix main configuration `/etc/postfix/main.cf`
 
-...
-here is it
-...
+```
+ here is it
+   and here
+```
 
 `smtpd_recipient_restrictions =`
 
